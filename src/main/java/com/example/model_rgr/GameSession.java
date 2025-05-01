@@ -1,8 +1,7 @@
 package com.example.model_rgr;
 
-import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
+import java.util.Random;
 
 public class GameSession {
     private final Maze maze;
@@ -19,6 +18,7 @@ public class GameSession {
         this.currentPosition = maze.getStartPoint();
         this.stepsTaken = 0;
         this.gameOver = false;
+        this.playerWon = false;
     }
 
     public boolean makeMove(int proposedMove) {
@@ -37,11 +37,9 @@ public class GameSession {
         if (shouldAgree) {
             currentPosition = proposedMove;
         } else {
-            // Выбираем случайный ДРУГОЙ допустимый ход
-            Set<Integer> otherMoves = new HashSet<>(possibleMoves);
-            otherMoves.remove(proposedMove);
-            currentPosition = otherMoves.isEmpty() ? currentPosition :
-                    otherMoves.stream().skip(random.nextInt(otherMoves.size())).findFirst().get();
+            Set<Integer> availableMoves = maze.getAvailableMovesWhenDisagree(currentPosition, proposedMove);
+            currentPosition = availableMoves.isEmpty() ? currentPosition :
+                    availableMoves.stream().skip(random.nextInt(availableMoves.size())).findFirst().get();
         }
 
         if (maze.isExit(currentPosition)) {
@@ -55,8 +53,19 @@ public class GameSession {
         return shouldAgree;
     }
 
-    public int getCurrentPosition() { return currentPosition; }
-    public int getStepsTaken() { return stepsTaken; }
-    public boolean isGameOver() { return gameOver; }
-    public boolean isPlayerWon() { return playerWon; }
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public int getStepsTaken() {
+        return stepsTaken;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public boolean isPlayerWon() {
+        return playerWon;
+    }
 }

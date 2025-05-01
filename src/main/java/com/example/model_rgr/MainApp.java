@@ -155,13 +155,13 @@ public class MainApp extends Application {
                     .orElse(currentPosition);
 
             boolean agreed = session.makeMove(proposedMove);
-            gameLog.appendText(String.format(
-                    "Ход %d: предложен ход в %d. Алгоритм %s. Новое положение: %d\n",
-                    session.getStepsTaken(),
-                    proposedMove,
-                    agreed ? "согласился" : "отказался",
-                    session.getCurrentPosition()
-            ));
+//            gameLog.appendText(String.format(
+//                    "Ход %d: предложен ход в %d. Алгоритм %s. Новое положение: %d\n",
+//                    session.getStepsTaken(),
+//                    proposedMove,
+//                    agreed ? "согласился" : "отказался",
+//                    session.getCurrentPosition()
+//            ));
 
             currentPosition = session.getCurrentPosition();
         }
