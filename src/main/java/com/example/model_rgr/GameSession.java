@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.Random;
 
 public class GameSession {
-    private final Maze maze;
+    private final Labir labir;
     private final ResponseAlgorithm algorithm;
     private final Random random = new Random();
     private int currentPosition;
@@ -12,10 +12,10 @@ public class GameSession {
     private boolean gameOver;
     private boolean playerWon;
 
-    public GameSession(Maze maze, ResponseAlgorithm algorithm) {
-        this.maze = maze;
+    public GameSession(Labir labir, ResponseAlgorithm algorithm) {
+        this.labir = labir;
         this.algorithm = algorithm;
-        this.currentPosition = maze.getStartPoint();
+        this.currentPosition = labir.getStartPoint();
         this.stepsTaken = 0;
         this.gameOver = false;
         this.playerWon = false;
@@ -25,7 +25,7 @@ public class GameSession {
         if (gameOver) return false;
 
         stepsTaken++;
-        Set<Integer> possibleMoves = maze.getPossibleMoves(currentPosition);
+        Set<Integer> possibleMoves = labir.getPossibleMoves(currentPosition);
 
         if (!possibleMoves.contains(proposedMove)) {
             gameOver = true;
@@ -37,15 +37,15 @@ public class GameSession {
         if (shouldAgree) {
             currentPosition = proposedMove;
         } else {
-            Set<Integer> availableMoves = maze.getAvailableMovesWhenDisagree(currentPosition, proposedMove);
+            Set<Integer> availableMoves = labir.getAvailableMovesWhenDisagree(currentPosition, proposedMove);
             currentPosition = availableMoves.isEmpty() ? currentPosition :
                     availableMoves.stream().skip(random.nextInt(availableMoves.size())).findFirst().get();
         }
 
-        if (maze.isExit(currentPosition)) {
+        if (labir.isExit(currentPosition)) {
             gameOver = true;
             playerWon = true;
-        } else if (stepsTaken >= maze.getMaxSteps()) {
+        } else if (stepsTaken >= labir.getMaxSteps()) {
             gameOver = true;
             playerWon = false;
         }

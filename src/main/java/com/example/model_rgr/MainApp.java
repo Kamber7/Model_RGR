@@ -13,7 +13,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class MainApp extends Application {
-    private Maze maze = new Maze();
+    private Labir labir = new Labir();
     private GameStats stats = new GameStats();
     private ComboBox<String> algorithmSelector;
     private TextArea gameLog;
@@ -102,8 +102,8 @@ public class MainApp extends Application {
             ResponseAlgorithm algorithm = createAlgorithm(); // ВАЖНО: создавать заново!
             gameLog.appendText("\nИгра #" + i + ". Алгоритм: " + algorithm.getAlgorithmName() + "\n");
 
-            GameSession session = new GameSession(maze, algorithm);
-            gameLog.appendText("Стартовая позиция: " + maze.getStartPoint() + "\n");
+            GameSession session = new GameSession(labir, algorithm);
+            gameLog.appendText("Стартовая позиция: " + labir.getStartPoint() + "\n");
             simulateGame(session);
         }
 
@@ -147,7 +147,7 @@ public class MainApp extends Application {
         int currentPosition = session.getCurrentPosition();
 
         while (!session.isGameOver()) {
-            Set<Integer> possibleMoves = maze.getPossibleMoves(currentPosition);
+            Set<Integer> possibleMoves = labir.getPossibleMoves(currentPosition);
             // Выбираем случайный ход из возможных вместо первого
             int proposedMove = possibleMoves.stream()
                     .skip(new Random().nextInt(possibleMoves.size()))

@@ -3,11 +3,10 @@ package com.example.model_rgr;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class Maze {
+public class Labir {
     private static final Set<Integer> EXIT_POINTS = Set.of(1, 5, 9, 24, 26);
     private static final int START_POINT = 13;
     private static final int MAX_STEPS = 25;
@@ -16,7 +15,7 @@ public class Maze {
     private final Map<Integer, Set<Integer>> connections;
     private final Map<Integer, Integer> levelMap;
 
-    public Maze() {
+    public Labir() {
         connections = new HashMap<>();
         levelMap = new HashMap<>();
         initializeLevels();
