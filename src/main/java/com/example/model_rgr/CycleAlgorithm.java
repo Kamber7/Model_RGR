@@ -17,6 +17,6 @@ public class CycleAlgorithm implements ResponseAlgorithm {
 
     @Override
     public String getAlgorithmName() {
-        return "Циклический алгоритм (5с/6н/2с/4н/4с/1н/1с/2н)";
+        return "Патерн алгоритм (5с/6н/2с/4н/4с/1н/1с/2н)";
     }
 }

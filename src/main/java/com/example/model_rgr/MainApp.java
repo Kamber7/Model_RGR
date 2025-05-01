@@ -40,7 +40,7 @@ public class MainApp extends Application {
                 "Всегда согласен",
                 "Всегда не согласен",
                 "Случайный выбор",
-                "Циклический алгоритм",
+                "Патерн алгоритм",
                 "Пользовательский алгоритм"
         );
         algorithmSelector.getSelectionModel().selectFirst();
@@ -94,7 +94,7 @@ public class MainApp extends Application {
         } catch (NumberFormatException e) {
             runCount = 1; // если ошибка ввода, запускаем 1 раз
         }
-
+        stats.reset();
         gameLog.clear();
         gameLog.appendText("Запуск " + runCount + " игр.\n");
 
@@ -116,7 +116,7 @@ public class MainApp extends Application {
             case "Всегда согласен": return new AlwaysAgreeAlgorithm();
             case "Всегда не согласен": return new AlwaysDisagreeAlgorithm();
             case "Случайный выбор": return new RandomAlgorithm();
-            case "Циклический алгоритм": return new CycleAlgorithm();
+            case "Патерн алгоритм": return new CycleAlgorithm();
             case "Пользовательский алгоритм": return createCustomAlgorithm();
             default: return new AlwaysAgreeAlgorithm();
         }
